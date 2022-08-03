@@ -96,7 +96,41 @@ document.studentSearchFrm.addEventListener('submit', (e) => {
 		error : console.log
 	});
 });
+const updateStudent = (e) => {
+	const frm = document.studentUpdateFrm;
+	const no = frm.no.value;
+	const name = frm.name.value;
+	const tel = frm.tel.value;
+	console.log({no});
+	console.log({name});
+	console.log({tel});
+	$.ajax({
+		url : "${pageContext.request.contextPath}/student/updateStudent.do",
+		data : {no, name, tel},
+		method : "POST",
+		success(response) {
+			alert("회원정보가 수정되었습니다.");
+		},
+		error : console.log
+	});
+};
 
+const deleteStudent = (e) => {
+	const no = document.studentUpdateFrm.no.value;
+	
+	if(confirm("해당 학생정보를 정말로 삭제하시겠습니까?")) {
+		$.ajax({
+			url : "${pageContext.request.contextPath}/student/deleteStudent.do",
+			data : {no},
+			method : "POST",
+			success(response) {
+				alert(`\${no}번 학생정보가 삭제 되었습니다.`);
+				location.reload();
+			},
+			error : console.log
+		});
+	}
+};
 </script>
 </body>
 </html>

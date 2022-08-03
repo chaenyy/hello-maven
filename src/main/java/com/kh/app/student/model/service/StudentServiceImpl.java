@@ -62,4 +62,38 @@ public class StudentServiceImpl implements StudentService {
 			return studentDao.selectOneStudent(sqlSession, no);
 		}
 	}
+	
+	// 학생정보 수정
+	@Override
+	public int updateStudent(Map<String, Object> data) {
+		SqlSession sqlSession = getSqlSession();
+		int result = 0;
+		try {
+			result = studentDao.updateStudent(sqlSession, data);
+			sqlSession.commit();
+		} catch(Exception e) {
+			sqlSession.rollback();
+			throw e;
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+	
+	// 학생정보 삭제
+	@Override
+	public int deleteStudent(int no) {
+		SqlSession sqlSession = getSqlSession();
+		int result = 0;
+		try {
+			result = studentDao.deleteStudent(sqlSession, no);
+			sqlSession.commit();
+		} catch(Exception e) {
+			sqlSession.rollback();
+			throw e;
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
 }

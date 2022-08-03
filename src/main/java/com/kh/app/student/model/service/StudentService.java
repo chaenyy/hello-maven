@@ -13,5 +13,9 @@ public interface StudentService {
 	int getTotalCount();
 
 	Student selectOneStudent(int no);
+
+	int updateStudent(Map<String, Object> data);
+
+	int deleteStudent(int no);
 	
 }
